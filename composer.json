@@ -1,0 +1,25 @@
+{
+    "name": "iftiarhossain/gsap-motion-elementor",
+    "description": "Professional all-in-one GSAP animation toolkit for Elementor.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Iftiar Hossain",
+            "email": "iftiar.hossain163@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "GME\\": "includes/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}

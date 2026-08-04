@@ -1,0 +1,17 @@
+{
+  "name": "gsap-motion-elementor",
+  "version": "1.0.0",
+  "description": "Build pipeline for GSAP Motion for Elementor",
+  "private": true,
+  "scripts": {
+    "build": "node esbuild.config.js --production",
+    "watch": "node esbuild.config.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0",
+    "sass": "^1.71.0"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0"
+  }
+}
