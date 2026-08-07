@@ -12,6 +12,7 @@ final class Loader
     public function __construct()
     {
         $this->register_motion_controls();
+        new \GME\Frontend\AnimationRenderer();
     }
 
     private function register_motion_controls()
