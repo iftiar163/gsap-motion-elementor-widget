@@ -133,6 +133,108 @@ final class MotionControls {
 			)
 		);
 
+		$element->add_control(
+			self::PREFIX . 'animation_repeat',
+			array(
+				'label'       => __( 'Repeat', 'gsap-motion-elementor' ),
+				'type'        => Controls_Manager::NUMBER,
+				'default'     => 0,
+				'min'         => -1,
+				'description' => __( 'Number of times to repeat after the first play. Use -1 to repeat infinitely. Leave 0 to play once.', 'gsap-motion-elementor' ),
+				'condition'   => array(
+					self::PREFIX . 'animation_enabled' => 'yes',
+				),
+			)
+		);
+
+		$element->add_control(
+			self::PREFIX . 'animation_yoyo',
+			array(
+				'label'        => __( 'Yoyo (Bounce Back)', 'gsap-motion-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'gsap-motion-elementor' ),
+				'label_off'    => __( 'No', 'gsap-motion-elementor' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'description'  => __( 'Only has a visible effect when Repeat is set above 0 or -1.', 'gsap-motion-elementor' ),
+				'condition'    => array(
+					self::PREFIX . 'animation_enabled' => 'yes',
+				),
+			)
+		);
+
+		$element->add_control(
+			self::PREFIX . 'scroll_behavior',
+			array(
+				'label'     => __( 'Scroll Behavior', 'gsap-motion-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'play_once',
+				'options'   => array(
+					'play_once' => __( 'Play Once', 'gsap-motion-elementor' ),
+					'scrub'     => __( 'Scrub With Scroll', 'gsap-motion-elementor' ),
+				),
+				'condition' => array(
+					self::PREFIX . 'animation_enabled' => 'yes',
+					self::PREFIX . 'animation_trigger' => 'on_scroll',
+				),
+			)
+		);
+
+		$element->add_control(
+			self::PREFIX . 'scrub_amount',
+			array(
+				'label'       => __( 'Scrub Smoothness', 'gsap-motion-elementor' ),
+				'type'        => Controls_Manager::NUMBER,
+				'default'     => 1,
+				'min'         => 0,
+				'max'         => 3,
+				'step'        => 0.1,
+				'description' => __( '0 = tightly tied to scroll position. Higher values add a smoothing delay.', 'gsap-motion-elementor' ),
+				'condition'   => array(
+					self::PREFIX . 'animation_enabled' => 'yes',
+					self::PREFIX . 'animation_trigger' => 'on_scroll',
+					self::PREFIX . 'scroll_behavior'   => 'scrub',
+				),
+			)
+		);
+
+		// Stagger only makes sense on elements that actually contain
+		// children — Section, Column, and Container types.
+		if ( in_array( $element->get_name(), array( 'section', 'column', 'container' ), true ) ) {
+
+			$element->add_control(
+				self::PREFIX . 'stagger_children',
+				array(
+					'label'        => __( 'Stagger Children', 'gsap-motion-elementor' ),
+					'type'         => Controls_Manager::SWITCHER,
+					'label_on'     => __( 'Yes', 'gsap-motion-elementor' ),
+					'label_off'    => __( 'No', 'gsap-motion-elementor' ),
+					'return_value' => 'yes',
+					'default'      => '',
+					'description'  => __( 'Animate each direct child one after another instead of animating this element as a whole.', 'gsap-motion-elementor' ),
+					'condition'    => array(
+						self::PREFIX . 'animation_enabled' => 'yes',
+					),
+				)
+			);
+
+			$element->add_control(
+				self::PREFIX . 'stagger_amount',
+				array(
+					'label'     => __( 'Stagger Delay (seconds)', 'gsap-motion-elementor' ),
+					'type'      => Controls_Manager::NUMBER,
+					'default'   => 0.15,
+					'min'       => 0,
+					'max'       => 1,
+					'step'      => 0.05,
+					'condition' => array(
+						self::PREFIX . 'animation_enabled' => 'yes',
+						self::PREFIX . 'stagger_children'  => 'yes',
+					),
+				)
+			);
+		}
+
 		$element->end_controls_section();
 	}
 }

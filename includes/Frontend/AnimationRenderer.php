@@ -30,11 +30,17 @@ final class AnimationRenderer {
         }
 
         $animation_settings = [
-            'type'     => $settings['gme_animation_type'] ?? 'fade',
-			'trigger'  => $settings['gme_animation_trigger'] ?? 'on_scroll',
-			'duration' => $settings['gme_animation_duration'] ?? 1,
-			'delay'    => $settings['gme_animation_delay'] ?? 0,
-			'easing'   => $settings['gme_animation_easing'] ?? 'power2.out',
+           'type'            => $settings['gme_animation_type'] ?? 'fade',
+			'trigger'         => $settings['gme_animation_trigger'] ?? 'on_scroll',
+			'duration'        => $settings['gme_animation_duration'] ?? 1,
+			'delay'           => $settings['gme_animation_delay'] ?? 0,
+			'easing'          => $settings['gme_animation_easing'] ?? 'power2.out',
+			'repeat'          => $settings['gme_animation_repeat'] ?? 0,
+			'yoyo'            => $settings['gme_animation_yoyo'] ?? '',
+			'scroll_behavior' => $settings['gme_scroll_behavior'] ?? 'play_once',
+			'scrub_amount'    => $settings['gme_scrub_amount'] ?? 1,
+			'stagger_children' => $settings['gme_stagger_children'] ?? '',
+			'stagger_amount'  => $settings['gme_stagger_amount'] ?? 0.15,
         ];
 
         $element->add_render_attribute(
