@@ -1,0 +1,1 @@
+(()=>{jQuery(window).on("elementor/editor/init",()=>{let t=null;elementor.channels.editor.on("change",e=>{if(!e||!e.model||typeof e.model.changedAttributes!="function")return;let n=e.model.changedAttributes();!n||!Object.keys(n).some(o=>o.indexOf("gme_")===0)||(clearTimeout(t),t=setTimeout(()=>{elementor.reloadPreview()},600))})});})();

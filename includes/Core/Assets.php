@@ -41,19 +41,19 @@ final class Assets
         );
     }
 
+
     public function maybe_enqueue_frontend_assets()
     {
-        error_log('GME DEBUG: maybe_enqueue_frontend_assets fired. has_animation = ' . (self::$has_animation ? 'true' : 'false'));
+        $force_global  = Plugin::instance()->get_setting('load_gsap_globally', false);
+		$in_editor_preview = class_exists( '\Elementor\Plugin' )
+			&& \Elementor\Plugin::$instance->preview->is_preview_mode();
 
-        $force_global = Plugin::instance()->get_setting('load_gsap_globally', false);
+		if (! $force_global && ! $in_editor_preview && ! self::$has_animation) {
+			return;
+		}
 
-        if (! $force_global && ! self::$has_animation) {
-            return;
-        }
-
-        error_log('GME DEBUG: enqueuing frontend assets now');
-        wp_enqueue_style('gme-frontend');
-        wp_enqueue_script('gme-frontend');
+		wp_enqueue_style('gme-frontend');
+		wp_enqueue_script('gme-frontend');
     }
 
     public function enqueue_editor_assets()

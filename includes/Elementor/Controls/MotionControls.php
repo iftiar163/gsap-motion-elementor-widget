@@ -42,6 +42,7 @@ final class MotionControls {
 				'label_off'    => __( 'No', 'gsap-motion-elementor' ),
 				'return_value' => 'yes',
 				'default'      => '',
+				'render_type'  => 'template',
 			)
 		);
 
@@ -63,6 +64,7 @@ final class MotionControls {
 				'condition' => array(
 					self::PREFIX . 'animation_enabled' => 'yes',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -79,6 +81,7 @@ final class MotionControls {
 				'condition' => array(
 					self::PREFIX . 'animation_enabled' => 'yes',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -94,6 +97,7 @@ final class MotionControls {
 				'condition' => array(
 					self::PREFIX . 'animation_enabled' => 'yes',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -109,6 +113,7 @@ final class MotionControls {
 				'condition' => array(
 					self::PREFIX . 'animation_enabled' => 'yes',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -130,6 +135,7 @@ final class MotionControls {
 				'condition' => array(
 					self::PREFIX . 'animation_enabled' => 'yes',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -144,6 +150,7 @@ final class MotionControls {
 				'condition'   => array(
 					self::PREFIX . 'animation_enabled' => 'yes',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -160,6 +167,7 @@ final class MotionControls {
 				'condition'    => array(
 					self::PREFIX . 'animation_enabled' => 'yes',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -177,6 +185,7 @@ final class MotionControls {
 					self::PREFIX . 'animation_enabled' => 'yes',
 					self::PREFIX . 'animation_trigger' => 'on_scroll',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
@@ -195,12 +204,13 @@ final class MotionControls {
 					self::PREFIX . 'animation_trigger' => 'on_scroll',
 					self::PREFIX . 'scroll_behavior'   => 'scrub',
 				),
+				'render_type'  => 'template',
 			)
 		);
 
 		// Stagger only makes sense on elements that actually contain
 		// children — Section, Column, and Container types.
-		if ( in_array( $element->get_name(), array( 'section', 'column', 'container' ), true ) ) {
+		if ( in_array( $element->get_name(), array( 'common-base', 'container' ), true ) ) {
 
 			$element->add_control(
 				self::PREFIX . 'stagger_children',
@@ -215,6 +225,7 @@ final class MotionControls {
 					'condition'    => array(
 						self::PREFIX . 'animation_enabled' => 'yes',
 					),
+					'render_type'  => 'template',
 				)
 			);
 
@@ -231,6 +242,7 @@ final class MotionControls {
 						self::PREFIX . 'animation_enabled' => 'yes',
 						self::PREFIX . 'stagger_children'  => 'yes',
 					),
+					'render_type'  => 'template',
 				)
 			);
 		}

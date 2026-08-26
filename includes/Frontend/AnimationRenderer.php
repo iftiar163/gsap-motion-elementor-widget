@@ -25,9 +25,11 @@ final class AnimationRenderer {
             return;
         }
 
-        if( ! \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
-            Assets::mark_animation_used();
-        }
+        // if( ! \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+        //     Assets::mark_animation_used();
+        // }
+
+        Assets::mark_animation_used();
 
         $animation_settings = [
            'type'            => $settings['gme_animation_type'] ?? 'fade',

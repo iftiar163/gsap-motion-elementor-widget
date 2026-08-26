@@ -61,7 +61,7 @@ final class Plugin
     {
         $defaults = [
             'load_gsap_globally' => false,
-            'enabled_widgets'    => [],
+            'disabled_widgets'    => [],
         ];
 
         $saved = get_option('gme_settings', []);
