@@ -12,3 +12,50 @@
     font-size: 16px;
   }
 }
+
+.gme-draw-svg {
+  svg [stroke] {
+    stroke: var(--gme-stroke-color, currentColor);
+    stroke-width: var(--gme-stroke-width, inherit);
+  }
+}
+
+.gme-flip-toggle {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+
+  .gme-flip-toggle-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    font-weight: 600;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    background: #f3f4f6;
+  }
+
+  .gme-flip-toggle-content-wrap {
+    display: none;
+    padding: 16px 18px;
+  }
+
+  &.is-open .gme-flip-toggle-content-wrap {
+    display: block;
+  }
+
+  .gme-flip-toggle-icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  &.is-open .gme-flip-toggle-icon::before {
+    content: "−";
+  }
+  .gme-flip-toggle-icon::before {
+    content: "+";
+  }
+}

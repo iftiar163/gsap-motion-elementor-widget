@@ -3,6 +3,9 @@
 namespace GME\Elementor;
 
 use GME\Elementor\Widgets\Counter;
+use GME\Elementor\Widgets\SplitText;
+use GME\Elementor\Widgets\DrawSvg;
+use GME\Elementor\Widgets\FlipToggle;
 use GME\Core\Plugin;
 
 defined( 'ABSPATH' ) || exit;
@@ -11,6 +14,9 @@ final class WidgetsManager {
 
     const WIDGETS = array(
 		Counter::class,
+		SplitText::class,
+		DrawSvg::class,
+		FlipToggle::class,
 	);
 
     public function __construct() {

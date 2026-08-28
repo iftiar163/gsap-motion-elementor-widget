@@ -1,9 +1,15 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { Flip } from "gsap/Flip";
 import { getFromVars } from "./animation-presets";
 import { registerCounterWidget } from "./widgets/counter";
+import { registerSplitTextWidget } from "./widgets/split-text";
+import { registerDrawSvgWidget } from "./widgets/draw-svg";
+import { registerFlipToggleWidget } from "./widgets/flip-toggle";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip);
 
 function buildAnimationVars(settings) {
   return {
@@ -78,6 +84,9 @@ function registerWithElementor() {
   );
 
   registerCounterWidget();
+  registerSplitTextWidget();
+  registerDrawSvgWidget();
+  registerFlipToggleWidget();
 }
 
 if (window.elementorFrontend && window.elementorFrontend.hooks) {
