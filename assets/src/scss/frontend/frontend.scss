@@ -39,23 +39,47 @@
   }
 
   .gme-flip-toggle-content-wrap {
-    display: none;
-    padding: 16px 18px;
+    height: 0;
+    overflow: hidden;
   }
 
-  &.is-open .gme-flip-toggle-content-wrap {
-    display: block;
+  .gme-flip-toggle-content {
+    padding: 16px 18px;
   }
 
   .gme-flip-toggle-icon {
     font-size: 20px;
     line-height: 1;
+
+    &::before {
+      content: "+";
+    }
   }
 
   &.is-open .gme-flip-toggle-icon::before {
     content: "−";
   }
-  .gme-flip-toggle-icon::before {
-    content: "+";
+}
+
+.gme-progress-bar {
+  .gme-progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .gme-progress-track {
+    width: 100%;
+    height: 12px;
+    border-radius: 20px;
+    background: #e5e7eb;
+    overflow: hidden;
+  }
+
+  .gme-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #6366f1;
+    border-radius: 20px;
   }
 }

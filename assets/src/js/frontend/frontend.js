@@ -8,6 +8,7 @@ import { registerCounterWidget } from "./widgets/counter";
 import { registerSplitTextWidget } from "./widgets/split-text";
 import { registerDrawSvgWidget } from "./widgets/draw-svg";
 import { registerFlipToggleWidget } from "./widgets/flip-toggle";
+import { registerProgressBarWidget } from "./widgets/progress-bar";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, Flip);
 
@@ -87,6 +88,7 @@ function registerWithElementor() {
   registerSplitTextWidget();
   registerDrawSvgWidget();
   registerFlipToggleWidget();
+  registerProgressBarWidget();
 }
 
 if (window.elementorFrontend && window.elementorFrontend.hooks) {

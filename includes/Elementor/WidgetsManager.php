@@ -6,6 +6,7 @@ use GME\Elementor\Widgets\Counter;
 use GME\Elementor\Widgets\SplitText;
 use GME\Elementor\Widgets\DrawSvg;
 use GME\Elementor\Widgets\FlipToggle;
+use GME\Elementor\Widgets\ProgressBar;
 use GME\Core\Plugin;
 
 defined( 'ABSPATH' ) || exit;
@@ -17,6 +18,7 @@ final class WidgetsManager {
 		SplitText::class,
 		DrawSvg::class,
 		FlipToggle::class,
+		ProgressBar::class,
 	);
 
     public function __construct() {

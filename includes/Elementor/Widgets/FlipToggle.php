@@ -3,6 +3,9 @@ namespace GME\Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
 use GME\Core\Assets;
 
 // Prevent direct file access.
@@ -34,6 +37,8 @@ final class FlipToggle extends Widget_Base {
 
 	protected function register_controls() {
 
+		// ---------- CONTENT TAB ----------
+
 		$this->start_controls_section(
 			'section_content',
 			array(
@@ -44,9 +49,9 @@ final class FlipToggle extends Widget_Base {
 		$this->add_control(
 			'header_text',
 			array(
-				'label'   => __( 'Header Text', 'gsap-motion-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Click to expand', 'gsap-motion-elementor' ),
+				'label'       => __( 'Header Text', 'gsap-motion-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => __( 'Click to expand', 'gsap-motion-elementor' ),
 				'label_block' => true,
 			)
 		);
@@ -56,7 +61,7 @@ final class FlipToggle extends Widget_Base {
 			array(
 				'label'   => __( 'Content', 'gsap-motion-elementor' ),
 				'type'    => Controls_Manager::WYSIWYG,
-				'default' => __( '<p>This content smoothly expands and collapses using GSAP Flip.</p>', 'gsap-motion-elementor' ),
+				'default' => __( '<p>This content smoothly expands and collapses using GSAP.</p>', 'gsap-motion-elementor' ),
 			)
 		);
 
@@ -109,6 +114,8 @@ final class FlipToggle extends Widget_Base {
 
 		$this->end_controls_section();
 
+		// ---------- STYLE TAB: HEADER ----------
+
 		$this->start_controls_section(
 			'section_style_header',
 			array(
@@ -140,6 +147,160 @@ final class FlipToggle extends Widget_Base {
 			)
 		);
 
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'header_typography',
+				'selector' => '{{WRAPPER}} .gme-flip-toggle-header',
+			)
+		);
+
+		$this->add_responsive_control(
+			'header_padding',
+			array(
+				'label'      => __( 'Padding', 'gsap-motion-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .gme-flip-toggle-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'header_icon_heading',
+			array(
+				'label'     => __( 'Icon', 'gsap-motion-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			)
+		);
+
+		$this->add_control(
+			'header_icon_color',
+			array(
+				'label'     => __( 'Icon Color', 'gsap-motion-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .gme-flip-toggle-icon' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'header_icon_size',
+			array(
+				'label'      => __( 'Icon Size', 'gsap-motion-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => array(
+					'px' => array(
+						'min' => 10,
+						'max' => 48,
+					),
+				),
+				'default'    => array(
+					'size' => 20,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .gme-flip-toggle-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		// ---------- STYLE TAB: CONTENT ----------
+
+		$this->start_controls_section(
+			'section_style_content',
+			array(
+				'label' => __( 'Content', 'gsap-motion-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'content_bg_color',
+			array(
+				'label'     => __( 'Background Color', 'gsap-motion-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .gme-flip-toggle-content' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'content_text_color',
+			array(
+				'label'     => __( 'Text Color', 'gsap-motion-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .gme-flip-toggle-content' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'content_typography',
+				'selector' => '{{WRAPPER}} .gme-flip-toggle-content',
+			)
+		);
+
+		$this->add_responsive_control(
+			'content_padding',
+			array(
+				'label'      => __( 'Padding', 'gsap-motion-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .gme-flip-toggle-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		// ---------- STYLE TAB: BOX ----------
+
+		$this->start_controls_section(
+			'section_style_box',
+			array(
+				'label' => __( 'Box', 'gsap-motion-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'box_border',
+				'selector' => '{{WRAPPER}} .gme-flip-toggle',
+			)
+		);
+
+		$this->add_responsive_control(
+			'box_border_radius',
+			array(
+				'label'      => __( 'Border Radius', 'gsap-motion-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .gme-flip-toggle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'box_shadow',
+				'selector' => '{{WRAPPER}} .gme-flip-toggle',
+			)
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -148,7 +309,7 @@ final class FlipToggle extends Widget_Base {
 
 		Assets::mark_animation_used();
 
-		$start_open = ! empty( $settings['start_open'] ) ? 'yes' === $settings['start_open'] : false;
+		$start_open = ! empty( $settings['start_open'] ) && 'yes' === $settings['start_open'];
 
 		$config = array(
 			'duration' => $settings['duration'] ?? 0.4,
@@ -158,7 +319,7 @@ final class FlipToggle extends Widget_Base {
 		<div class="gme-flip-toggle<?php echo $start_open ? ' is-open' : ''; ?>" data-gme-flip="<?php echo esc_attr( wp_json_encode( $config ) ); ?>">
 			<button type="button" class="gme-flip-toggle-header">
 				<?php echo esc_html( $settings['header_text'] ?? '' ); ?>
-				<span class="gme-flip-toggle-icon" aria-hidden="true">+</span>
+				<span class="gme-flip-toggle-icon" aria-hidden="true"></span>
 			</button>
 			<div class="gme-flip-toggle-content-wrap">
 				<div class="gme-flip-toggle-content">

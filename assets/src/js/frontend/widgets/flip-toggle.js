@@ -1,13 +1,11 @@
 import { gsap } from "gsap";
-import { Flip } from "gsap/Flip";
-
-gsap.registerPlugin(Flip);
 
 function initFlipToggle(el) {
   const header = el.querySelector(".gme-flip-toggle-header");
   const wrap = el.querySelector(".gme-flip-toggle-content-wrap");
+  const inner = el.querySelector(".gme-flip-toggle-content");
 
-  if (!header || !wrap) {
+  if (!header || !wrap || !inner) {
     return;
   }
 
@@ -21,20 +19,40 @@ function initFlipToggle(el) {
   const duration = parseFloat(config.duration) || 0.4;
   const ease = config.easing || "power2.inOut";
 
-  header.addEventListener("click", () => {
-    // 1. Record current state BEFORE the change.
-    const state = Flip.getState(wrap);
+  // Set the correct starting height immediately (no animation),
+  // based on whether "Start Expanded" was enabled.
+  const startsOpen = el.classList.contains("is-open");
+  gsap.set(wrap, { height: startsOpen ? "auto" : 0, overflow: "hidden" });
 
-    // 2. Make the abrupt change — toggling this class flips
-    // display between none/block via CSS (see frontend.scss).
+  header.addEventListener("click", () => {
+    const isOpening = !el.classList.contains("is-open");
     el.classList.toggle("is-open");
 
-    // 3. Animate smoothly across the recorded difference.
-    Flip.from(state, {
-      duration,
-      ease,
-      height: true,
-    });
+    if (isOpening) {
+      const targetHeight = inner.scrollHeight;
+      gsap.fromTo(
+        wrap,
+        { height: 0 },
+        {
+          height: targetHeight,
+          duration,
+          ease,
+          onComplete: () => {
+            // Release to 'auto' so dynamic content (e.g. a
+            // window resize reflowing text) still displays
+            // correctly, rather than staying locked to a
+            // stale pixel value.
+            gsap.set(wrap, { height: "auto" });
+          },
+        },
+      );
+    } else {
+      gsap.fromTo(
+        wrap,
+        { height: inner.scrollHeight },
+        { height: 0, duration, ease },
+      );
+    }
   });
 }
 
